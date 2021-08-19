@@ -1,7 +1,11 @@
 apply plugin: 'java'
-apply plugin:'application'
-mainClassName = "HelloWorld"
 
-run {
-    args fileName
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'commons-codec:commons-codec:1.8'
+    testCompile 'junit:junit:4.13'
+    testImplementation 'junit:junit:4.13'
 }

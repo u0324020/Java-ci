@@ -22,7 +22,7 @@ jobs:
       uses: github/super-linter@v4
       env:
         VALIDATE_ALL_CODEBASE: false # scan change parts
-        DEFAULT_BRANCH: master
+        DEFAULT_BRANCH: main
         GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
         VALIDATE_JAVA: true # java
         VALIDATE_DOCKERFILE: true

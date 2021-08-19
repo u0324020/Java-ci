@@ -16,8 +16,16 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
 
-    - name: Build with Gradle
-      run: gradle build
+    # combination of various linters
+    # help validate your source code
+    - name: Super-Linter
+      uses: github/super-linter@v4
+      env:
+        VALIDATE_ALL_CODEBASE: false # scan change parts
+        DEFAULT_BRANCH: master
+        GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+        VALIDATE_JAVA: true # java
+        VALIDATE_DOCKERFILE: true
 
     - name: Test with Gradle
       run: gradle test
@@ -29,10 +37,10 @@ jobs:
         files: 'build/test-results/test/*.xml'
         report_individual_runs: "true"
 
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v1
-      with:
-        languages: java
+    # - name: Initialize CodeQL
+    #   uses: github/codeql-action/init@v1
+    #   with:
+    #     languages: java
 
     # - run: javac -d classes src/main/java/tw/codedata/Hello.java
 
@@ -40,8 +48,8 @@ jobs:
       run: gradle build
       # /build/classes/java/main/tw/codedata/Hello.class
 
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v1
+    # - name: Perform CodeQL Analysis
+    #   uses: github/codeql-action/analyze@v1
     
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2.2.4

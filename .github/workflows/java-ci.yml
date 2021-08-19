@@ -37,7 +37,7 @@ jobs:
     # - run: javac -d classes src/main/java/tw/codedata/Hello.java
 
     - name: Build with Gradle
-      run: gradlew build
+      run: gradle build
       # /build/classes/java/main/tw/codedata/Hello.class
 
     - name: Perform CodeQL Analysis

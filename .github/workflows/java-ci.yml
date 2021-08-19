@@ -16,22 +16,17 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
 
-    - name: Validate Gradle wrapper
-      uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
-    
     - name: Build with Gradle
-      run: ./gradlew build
+      run: gradle build
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-
-    # Test
+    - name: Test with Gradle
+      run: gradle test
 
     - name: Publish unit test results
       uses: EnricoMi/publish-unit-test-result-action@v1
       if: always()
       with:
-        files: '*.xml'
+        files: 'build/test-results/test/*.xml'
         report_individual_runs: "true"
 
     - name: Initialize CodeQL
@@ -39,10 +34,11 @@ jobs:
       with:
         languages: java
 
-    - run: javac -d classes src/HelloWorld.java
+    # - run: javac -d classes src/main/java/tw/codedata/Hello.java
 
     - name: Build with Gradle
-      run: ./gradlew build
+      run: gradlew build
+      # /build/classes/java/main/tw/codedata/Hello.class
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1

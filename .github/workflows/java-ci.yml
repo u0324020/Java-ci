@@ -37,19 +37,22 @@ jobs:
         files: 'build/test-results/test/*.xml'
         report_individual_runs: "true"
 
-    # - name: Initialize CodeQL
-    #   uses: github/codeql-action/init@v1
-    #   with:
-    #     languages: java
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v1
+      with:
+        languages: java
+
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v1
 
     # - run: javac -d classes src/main/java/tw/codedata/Hello.java
 
-    - name: Build with Gradle
-      run: gradle build
-      # /build/classes/java/main/tw/codedata/Hello.class
+    # - name: Build with Gradle
+    #   run: gradle build
+    #   # /build/classes/java/main/tw/codedata/Hello.class
 
-    # - name: Perform CodeQL Analysis
-    #   uses: github/codeql-action/analyze@v1
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v1
     
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2.2.4
